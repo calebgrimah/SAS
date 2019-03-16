@@ -448,4 +448,10 @@ public class Controller {
         courseRosterMultipleCourses.setCourses(courses);
         return new ResponseEntity<>(courseRosterMultipleCourses,HttpStatus.OK);
     }
+    @GetMapping(value = "/test/{test}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> test(@PathVariable String test) {
+        return new ResponseEntity<>("Returns this" + test,HttpStatus.OK);
+    }
+
+
 }
