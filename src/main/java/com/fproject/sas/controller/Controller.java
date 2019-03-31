@@ -138,6 +138,7 @@ public class Controller {
     }
 
 
+
     //ATTENDANCE
     /*
     * 1.retrieve attendance for a single student in on a particular date
@@ -259,6 +260,17 @@ public class Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+    @PostMapping(value = "/user/{userId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateSingleUser(@PathVariable String userId, @RequestBody User user)
+    {
+        User gottenUser = userRepository.findFirstByUserId(userId);
+        if(gottenUser == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        gottenUser.setPassword(user.getPassword());
+        userRepository.save(gottenUser);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
